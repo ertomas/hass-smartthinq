@@ -1,10 +1,11 @@
 Home Assistant: LG SmartThinQ Component
 =======================================
 Support for LG Smartthinq device.
-This is made for korean only.
-If you want to apply other county devices, you have to change this code for your country
+Updated to work with US LG accounts
 
-This is made by sampsyo, I forked and add more device in it
+There seem to be many modes and methods not compatible with all devices that return errors. I have only tested with a mini split AC.
+
+This is made by sampsyo and modified by wkd8176. 
 
 
 A [Home Assistant][hass] component for controlling LG HVAC devices via their SmartThinQ platform, based on [WideQ][].
@@ -18,14 +19,14 @@ Here's how to use this:
 
        $ cd ~/.homeassistant
        $ mkdir wideq
-       $ git clone https://github.com/wkd8176/wideq.git wideq
+       $ git clone https://github.com/ertomas/wideq.git wideq
        $ cd wideq
        $ pip3 install -e .
 
 2. Clone this repository into your `~/.homeassistant` directory
 
        $ cd ~/.homeassistant
-       $ git clone https://github.com/wkd8176/hass-smartthinq.git
+       $ git clone https://github.com/ertomas/hass-smartthinq.git
 
 3. Authenticate with the SmartThinQ service to get a refresh token by running the WideQ example script. (Eventually, I would like to add a feature to the Home Assistant component that can let you log in through a UI, but I haven't gotten there yet.) Run this in the `wideq` directory:
 
