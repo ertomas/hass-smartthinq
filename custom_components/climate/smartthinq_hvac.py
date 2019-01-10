@@ -316,11 +316,11 @@ class LGEHVACDEVICE(LGEDevice, ClimateDevice):
         }
         data[ATTR_TARGET_TEMPERATURE] = self.target_temperature
         data[ATTR_AIRCLEAN_MODE] = self.is_airclean_mode
-        data[ATTR_COOLPOWER_MODE] = self.is_coolpower_mode
+      #  data[ATTR_COOLPOWER_MODE] = self.is_coolpower_mode
         data[ATTR_AUTODRY_MODE] = self.is_autodry_mode
-        data[ATTR_SMARTCARE_MODE] = self.is_smartcare_mode
+      #  data[ATTR_SMARTCARE_MODE] = self.is_smartcare_mode
         data[ATTR_POWERSAVE_MODE] = self.is_powersave_mode
-        data[ATTR_LONGPOWER_MODE] = self.is_longpower_mode
+      #  data[ATTR_LONGPOWER_MODE] = self.is_longpower_mode
         data[ATTR_UP_DOWN_MODE] = self.is_up_down_mode
         data[ATTR_HUMIDITY] = self._state.humidity
         data[ATTR_SENSORPM1] = self._state.sensorpm1
@@ -519,9 +519,11 @@ class LGEHVACDEVICE(LGEDevice, ClimateDevice):
         data = self._ac.get_filter_state()
         usetime = data['UseTime']
         changeperiod = data['ChangePeriod']
-        use = int(usetime)/int(changeperiod)
+        if changeperiod == '0':
+            return 'No Filter'
+        else:
+            use = int(usetime)/int(changeperiod)
         remain = (1 - use)*100
-
         if changeperiod == '0':
             return 'No Filter'
         else:
@@ -533,12 +535,15 @@ class LGEHVACDEVICE(LGEDevice, ClimateDevice):
 
         remaintime = data['RemainTime']
         changeperiod = data['ChangePeriod']
-        remain = int(remaintime)/int(changeperiod)
-
         if changeperiod == '0':
             return 'No mFilter'
         else:
-            return int(remain * 100)
+            remain = int(remaintime)/int(changeperiod)
+
+ #       if changeperiod == '0':
+ #           return 'No mFilter'
+ #       else:
+        return int(remain * 100)
 
 
     @property
